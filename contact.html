@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系作者 - FocalRailways官方网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!--统计代码-->
+	<script defer src="https://cloud.umami.is/script.js" data-website-id="88f3492e-560d-497c-ab31-6702f63cef8c"></script>
+
+    <style>
+
+		
+		/* 定义渐显 */
+		@keyframes fadeIn {
+			from { opacity: 0; transform: translateY(20px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		/* 应用 */
+		.container {
+			animation: fadeIn 0.8s ease-out forwards;
+			opacity: 0; 
+		}
+
+		.other {
+			animation: fadeIn 0.8s ease-out forwards;
+			opacity: 0; 
+		}
+
+		.form-group {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		
+		.form-group:nth-child(1) { animation-delay: 0.1s; }
+		.form-group:nth-child(2) { animation-delay: 0.2s; }
+		.form-group:nth-child(3) { animation-delay: 0.3s; }
+		.form-group:nth-child(4) { animation-delay: 0.3s; }
+		.form-group:nth-child(5) { animation-delay: 0.3s; }
+		.form-group:nth-child(6) { animation-delay: 0.3s; }
+		.submit-btn { animation: fadeIn 0.8s ease-out 0.4s forwards; }
+
+        
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1565C0;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --card-hover-bg: #e3f2fd;
+            --content-width: 90vw;
+            --content-height: calc(var(--content-width) * 9 / 16);
+        }
+
+        .dark-mode {
+            --primary-color: #2196F3;
+            --secondary-color: #0D47A1;
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --card-hover-bg: #1a237e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+		.other {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 1rem;
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .contact-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        button:hover {
+            background: var(--secondary-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+
+
+
+		header {
+			background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+			color: white;
+			padding: 1rem 0;
+			box-shadow: var(--shadow);
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			width: 100%;
+		}
+
+		.nav-container {
+			width: 100%;
+			max-width: none;
+			padding: 0 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-sizing: border-box;
+		}
+
+		.nav-left {
+			display: flex;
+			align-items: center;
+			gap: 1.5rem;
+			flex: 1;
+		}
+
+		.nav-right {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			justify-content: flex-end;
+			flex: 1;
+		}
+
+		.logo {
+			font-size: 1.5rem;
+			font-weight: bold;
+			white-space: nowrap;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 1.5rem;
+		}
+
+		.nav-links a {
+			color: white;
+			text-decoration: none;
+			font-weight: 500;
+			white-space: nowrap;
+		}
+
+		.theme-toggle {
+			background: rgba(255, 255, 255, 0.2);
+			border: none;
+			color: white;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.hamburger {
+			display: none;
+			background: none;
+			border: none;
+			color: white;
+			font-size: 1.5rem;
+			cursor: pointer;
+		}
+
+		
+		@media (max-width: 768px) {
+			.nav-container {
+				padding: 0 15px;
+			}
+			
+			.nav-links {
+				display: none;
+				flex-direction: column;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				padding: 1rem;
+				box-shadow: var(--shadow);
+			}
+			
+			.nav-links.active {
+				display: flex;
+			}
+			
+			.hamburger {
+				display: block;
+			}
+			
+			.nav-left, .nav-right {
+				flex: none;
+			}
+		}
+
+
+/*-----------------------------------------------------------------------------------*/
+
+
+
+        
+        .content-container {
+            width: var(--content-width);
+            max-width: 1200px;
+            margin: 2rem auto;
+            min-height: var(--content-height);
+            position: relative;
+        }
+
+        
+        .carousel {
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: 400px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+        }
+
+        .carousel-control {
+            background: rgba(255, 255, 255, 0.7);
+            color: #333;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: white;
+        }
+
+		.protection-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.001); /* 几乎完全透明 */
+			z-index: 10;
+			cursor: not-allowed;
+			pointer-events: all; /* 确保覆盖层能捕获所有交互 */
+		}
+
+		.image-container {
+			position: relative;
+			display: inline-block;
+		}
+
+
+		
+
+    </style>
+</head>
+<header>
+    <div class="nav-container">
+        <div class="nav-left">
+            <div class="logo">FocalRailways官方网站</div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">首页</a>
+                <a href="material.html">素材库</a>
+				<a href="offer.html" >提供素材</a>
+                <a href="tools.html">工具集</a>
+				<a href="contact.html">联系作者</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+</header>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-envelope"></i> 联系作者</h1>
+        
+        <div class="contact-info">
+			<p>如果您有建议或有问题需要反馈，请使用以下方法：</p>
+            <p><i class="fas fa-envelope"></i> 作者邮箱：3540579389@qq.com</p>
+            <p><i class="fas fa-comment"></i> 您也可以通过以下表单直接发送消息：</p>
+			<p>*表单功能暂未完善，请使用邮箱</p>
+        </div>
+        
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">您的姓名（社交账号）</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">您的邮箱</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">主题</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">消息内容</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit">发送消息</button>
+            </form>
+        </div>
+        
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回首页</a>
+		
+    </div>
+	<div class="other">
+		<h1> 其他</h1>
+		<div class="contact-info">
+			<h2>也可以通过作者的社交媒体账号私信，发送消息时请说明来意</h2>
+			<h3 onclick="window.open('https://space.bilibili.com/1867102189')"><u>Bilibili：走在广局的京局3D</u></h3>
+			<h3>微信视频号：FocalRailways</h3>
+			
+        </div>
+	</div>
+	<!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FocalRailways官方网站 | 保留所有权利 | 未经允许 禁止转载 包括且不限于盗图、商业用途等行为</p>
+        </div>
+    </footer>
+
+	</div>
+
+    <script>
+        // 简单的表单但是没后端
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 表单验证
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !subject || !message) {
+                alert('请填写所有必填字段');
+                return;
+            }
+            
+            
+            
+            alert('表单功能暂未完善，该功能不可用');
+            this.reset();
+        });
+        
+        
+        function updateThemeBasedOnTime() {
+            const hour = new Date().getHours();
+            const isNight = hour >= 19 || hour < 7;
+            document.body.classList.toggle('dark-mode', isNight);
+        }
+
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.style.animationPlayState = 'running'; 
+						observer.unobserve(entry.target); 
+					}
+				});
+			}, { threshold: 0.1 }); 
+
+			
+			const elementsToAnimate = document.querySelectorAll('.container, .form-group, .submit-btn');
+			elementsToAnimate.forEach(el => {
+				el.style.animationPlayState = 'paused'; 
+				observer.observe(el);
+			});
+		});
+		
+		document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 移动端菜单
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // 根据时间切深色
+        function updateThemeBasedOnTime() {
+            const hour = new Date().getHours();
+            const isNight = hour >= 19 || hour < 7;
+            document.body.classList.toggle('dark-mode', isNight);
+            updateThemeIcon(isNight);
+        }
+
+        // 更新主题图标
+        function updateThemeIcon(isDark) {
+            const icon = document.querySelector('#themeToggle i');
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // 手动切换主题
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            updateThemeIcon(isDarkMode);
+        });
+
+		// 禁用图片拖拽
+		document.addEventListener('dragstart', function(e) {
+			if (e.target.tagName === 'IMG') {
+				e.preventDefault();
+			}
+		});
+
+		// 禁用右键菜单
+		document.addEventListener('contextmenu', function(e) {
+			if (e.target.tagName === 'IMG' || e.target.classList.contains('protection-overlay')) {
+				e.preventDefault();
+			}
+		});
+
+		// 防止开发者工具
+		document.addEventListener('keydown', function(e) {
+			// 禁用F12
+			if (e.key === 'F12') {
+				e.preventDefault();
+			}
+			// 禁用Ctrl+Shift+I
+			if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+				e.preventDefault();
+			}
+			// 禁用Ctrl+U（查看源代码）
+			if (e.ctrlKey && e.key === 'u') {
+				e.preventDefault();
+			}
+		});
+
+        
+
+        
+        updateThemeBasedOnTime();
+    </script>
+</body>
+</html>

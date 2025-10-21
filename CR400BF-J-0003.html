@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素材详情 - FocalRailways官方网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!--统计代码-->
+	<script defer src="https://cloud.umami.is/script.js" data-website-id="88f3492e-560d-497c-ab31-6702f63cef8c"></script>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1565C0;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --card-hover-bg: #e3f2fd;
+            --content-width: 90vw;
+            --content-height: calc(var(--content-width) * 9 / 16);
+        }
+
+        .dark-mode {
+            --primary-color: #2196F3;
+            --secondary-color: #0D47A1;
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --card-hover-bg: #1a237e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: none;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: flex-end;
+            flex: 1;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-left, .nav-right {
+                flex: none;
+            }
+        }
+
+        /* 内容容器 */
+        .content-container {
+            width: var(--content-width);
+            max-width: 1200px;
+            margin: 2rem auto;
+            min-height: var(--content-height);
+            position: relative;
+        }
+
+        /* 返回按钮 */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .back-button.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .back-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* 素材详情区域 */
+        .material-detail {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .material-detail.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .material-image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .material-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+			border-radius: 10px;
+        }
+
+        .material-info {
+            padding: 2rem;
+        }
+
+        .material-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .material-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .material-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        /* 相关素材 */
+        .related-materials {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section-title.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .material-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+        }
+
+        .material-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .material-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .material-card-info {
+            padding: 1rem;
+        }
+
+        .material-card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .material-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* 动画延迟 */
+        .material-card:nth-child(1) { transition-delay: 0.1s; }
+        .material-card:nth-child(2) { transition-delay: 0.2s; }
+        .material-card:nth-child(3) { transition-delay: 0.3s; }
+        .material-card:nth-child(4) { transition-delay: 0.4s; }
+
+        @media (max-width: 768px) {
+            .material-image-container {
+                height: 300px;
+            }
+            
+            .material-info {
+                padding: 1.5rem;
+            }
+            
+            .material-title {
+                font-size: 1.6rem;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .material-image-container {
+                height: 250px;
+            }
+            
+            .material-info {
+                padding: 1rem;
+            }
+            
+            .material-title {
+                font-size: 1.4rem;
+            }
+            
+            .material-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+
+		p {text-indent:1em;} 
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">FocalRailways官方网站</div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html">首页</a>
+                    <a href="material.html">素材库</a>
+                    <a href="offer.html">提供素材</a>
+                    <a href="tools.html">工具集</a>
+                    <a href="contact.html">联系作者</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="content-container">
+        <!-- 返回按钮 -->
+        <a href="material.html" class="back-button" id="backButton">
+            <i class="fas fa-arrow-left"></i> 返回素材库
+        </a>
+
+        <!-- 素材详情 -->
+        <div class="material-detail" id="materialDetail">
+            <div class="material-image-container">
+                <img src="https://s21.ax1x.com/2025/09/13/pVWyi1H.jpg" alt="CR400BF-J-0003" class="material-image">
+            </div>
+            <div class="material-info">
+                <h1 class="material-title">CR400BF-J-0003</h1>
+                <div class="material-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>广东省 广州市 广州南站</span>
+                    </div>
+                    <div class="meta-item" >
+                        <i class="fas fa-images"></i>
+                        <span onclick="window.open('https://space.bilibili.com/1495172473')" style="text-decoration: underline;">XiaoweiEDM-CN</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>2025-09.12</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-tag"></i>
+                        <span>高速综合检测列车</span>
+                    </div>
+                </div>
+
+                <div class="material-description">
+                    <p>CR400BF-J-0003 是中国自主研发的复兴号高速综合检测列车，基于 CR400BF 智能动车组平台设计，专门用于高速铁路基础设施的多专业同步检测。</p>
+					<h3>一、基本定位与功能</h3>
+                    <p>CR400BF-J-0003 是我国首列基于复兴号平台的高速综合检测列车，主要承担高铁线路的轨道几何、接触网、通信信号、轮轨力、弓网关系等关键参数的实时监测与诊断任务。它通过集成高精度传感器和数据分析系统，可在运行中同步采集数据，为线路维护提供科学依据，被誉为高铁的 “黄医生”（其涂装在 CR400BF 智能动车组上的红色绸带改为黄色，以区分检测车，同时也别具一格）。</p>
+                </div> 
+            </div>
+
+			<div class="material-image-container">
+                <img src="https://s21.ax1x.com/2025/09/13/pVWybUf.jpg" alt="CR400BF-J-0003" class="material-image">
+            </div>
+            <div class="material-info">
+                <div class="material-description">
+					<h3>二、技术参数与设计特点</h3>
+					<h4>1.动力与速度</h4>
+					<p><b>编组形式：</b>4 动 4 拖（4M4T），全长 211.31 米，车体宽度 3360 毫米，高度 4050 毫米，最大轴重 17 吨。</p>
+					<p><b>动力配置：</b>采用 16 台 YJ268A 异步电机，总功率 10400kW，轮周功率 10140kW，设计时速 400km/h，运营时速 380km/h，最高试验速度 385km/h。</p>
+					<p><b>制动系统：</b>配备碳陶制动盘，并在 3 号、6 号车厢转向架加装线性涡流制动机，提升高速制动效率。</p>
+					
+					<h4>2.检测系统</h4>
+					<p><b>多专业集成：</b>集成轨道几何检测、车辆动态响应监测、轮轨力测量、弓网状态分析、通信信号评估等六大核心系统，可同步采集超过 2000 个技术参数。</p>
+					<p><b>智能诊断</b>检测数据通过车载计算机实时处理，异常情况可自动预警，诊断结果通过无线传输至地面控制中心，实现 “检测 - 分析 - 维护” 闭环管理。</p>
+					
+                    <h4>3.试验与验证</h4>
+					<p>该车参与了多项关键技术验证，例如在济郑高铁与 CR400AF-C 进行<b>时速 435km/h 相对交会试验</b>（相对速度 870km/h），为 CR450 系列研制积累数据。</p>
+					<p>2023 年 8 月，在贵南高铁正线试验中，最高运行速度达 385km/h，验证了检测系统在复杂地形下的可靠性。</p>
+
+                </div> 
+            </div>
+
+			<div class="material-image-container">
+                <img src="https://s21.ax1x.com/2025/09/13/pVW6CV0.jpg" alt="CR400BF-J-0003" class="material-image">
+            </div>
+            <div class="material-info">
+                <div class="material-description">
+					<h3>三、运营与应用</h3>
+					<h4>1.投入使用</h4>
+					<p>2023 年 4 月完成制造，9 月 20 日正式投入运营，隶属中国国家铁路集团有限公司，主要服务于国内新建高铁线路的联调联试及既有线路的定期检测。</p>
+					
+					<h4>2.典型任务</h4>
+					<p><b>集大原高铁提速试验：</b>2024 年 10 月，该车在内蒙古段以时速 160-275km/h 逐级提速，采集轨道几何尺寸、弓网关系等数据，为线路开通提供技术支持。</p>
+					<p><b>福厦高铁验证：</b>2023 年 6 月，与 CR400AF-J 协同测试，在湄洲湾跨海大桥实现单列时速 453km/h、相对交会时速 891km/h 的极端工况试验，验证了新型减阻降噪结构和轻量化转向架性能。</p>
+                </div> 
+            </div>
+
+			<div class="material-image-container">
+                <img src="https://s21.ax1x.com/2025/09/13/pVWcCyd.jpg" alt="CR400BF-J-0003" class="material-image">
+            </div>
+            <div class="material-info">
+                <div class="material-description">
+					<h3>四、涂装与外观</h3>
+					<h4>1.投入使用</h4>
+					<p>区别于传统 “全黄” 检测列车，CR400BF-J-0003 采用 CR400BF 智能动车组飘动的绸带并改为黄色以区分，既延续了复兴号的品牌辨识度，又通过局部色彩强化了其检测功能属性。</p>
+					
+					
+                </div> 
+            </div>
+
+
+			
+        </div>
+
+       
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FocalRailways官方网站 | 保留所有权利 | 未经允许 禁止转载 包括且不限于盗图、商业用途等行为</p>
+        </div>
+    </footer>
+
+    <script>
+        // 防止重复执行
+        if (!window.materialDetailInitialized) {
+            window.materialDetailInitialized = true;
+            
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            // 移动菜单
+            document.getElementById('hamburger').addEventListener('click', function() {
+                document.getElementById('navLinks').classList.toggle('active');
+            });
+
+            // 根据时间切换主题
+            function updateThemeBasedOnTime() {
+                const hour = new Date().getHours();
+                const isNight = hour >= 19 || hour < 7;
+                document.body.classList.toggle('dark-mode', isNight);
+                updateThemeIcon(isNight);
+            }
+
+            // 更新主题图标
+            function updateThemeIcon(isDark) {
+                const icon = document.querySelector('#themeToggle i');
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+
+            // 手动切换主题
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // 初始化主题
+            updateThemeBasedOnTime();
+
+            // 使用 Intersection Observer 检测元素进入视口
+            function initIntersectionObserver() {
+                // 检查浏览器是否支持 Intersection Observer
+                if (!('IntersectionObserver' in window)) {
+                    // 如果不支持，直接显示所有元素
+                    document.querySelectorAll('.back-button, .material-detail, .section-title, .material-card').forEach(element => {
+                        element.classList.add('show');
+                    });
+                    return;
+                }
+
+                // 检测是否为移动设备
+                const isMobile = window.innerWidth <= 768;
+                
+                // 根据设备类型调整配置
+                const observerOptions = {
+                    root: null,
+                    rootMargin: isMobile ? '0px 0px -5% 0px' : '0px 0px -10% 0px',
+                    threshold: isMobile ? 0.01 : 0.05
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('show');
+                            // 停止观察已触发的元素
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                
+                // 观察所有需要动画的元素
+                document.querySelectorAll('.back-button, .material-detail, .section-title, .material-card').forEach(element => {
+                    observer.observe(element);
+                });
+            }
+
+            // 禁用图片拖拽
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+
+            // 禁用右键菜单
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+
+            // 防止开发者工具
+            document.addEventListener('keydown', function(e) {
+                // 禁用F12
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                }
+                // 禁用Ctrl+Shift+I
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                    e.preventDefault();
+                }
+                // 禁用Ctrl+U（查看源代码）
+                if (e.ctrlKey && e.key === 'u') {
+                    e.preventDefault();
+                }
+            });
+
+            // 初始化
+            window.addEventListener('load', function() {
+                initIntersectionObserver();
+                
+                // 处理URL hash（如果有）
+                if (window.location.hash) {
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement) {
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }, 100);
+                    }
+                }
+            });
+
+            // 添加窗口大小变化监听器
+            window.addEventListener('resize', function() {
+                // 重新初始化 Intersection Observer
+                initIntersectionObserver();
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>测试后端连接</title>
+</head>
+<body>
+<h1>测试后端连接</h1>
+<button onclick="testConnection()">测试连接</button>
+<div id="result"></div>
+
+<script>
+    async function testConnection() {
+        try {
+            const response = await fetch('/api/health');
+            const result = await response.json();
+            document.getElementById('result').innerHTML =
+                `连接成功: ${JSON.stringify(result)}`;
+        } catch (error) {
+            document.getElementById('result').innerHTML =
+                `连接失败: ${error.message}`;
+        }
+    }
+</script>
+</body>
+</html>

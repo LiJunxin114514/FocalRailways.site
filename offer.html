@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提供素材 - FocalRailways官方网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!--统计代码-->
+	<script defer src="https://cloud.umami.is/script.js" data-website-id="88f3492e-560d-497c-ab31-6702f63cef8c"></script>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1565C0;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --card-hover-bg: #e3f2fd;
+            --content-width: 90vw;
+            --content-height: calc(var(--content-width) * 9 / 16);
+        }
+
+        .dark-mode {
+            --primary-color: #2196F3;
+            --secondary-color: #0D47A1;
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --card-hover-bg: #1a237e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: none;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: flex-end;
+            flex: 1;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-left, .nav-right {
+                flex: none;
+            }
+        }
+
+        /* 内容容器 */
+        .content-container {
+            width: var(--content-width);
+            max-width: 1200px;
+            margin: 2rem auto;
+            min-height: var(--content-height);
+            position: relative;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .page-title.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 英雄图片 */
+        .hero-container {
+            width: var(--content-width);
+            max-width: 1200px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-banner {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            height: 350px;
+        }
+
+        .hero-banner.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            object-position: right center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-image {
+                object-position: left bottom;
+            }
+            
+            .hero-banner {
+                height: 250px;
+            }
+        }
+
+        .hero-banner:hover .hero-image {
+            transform: scale(1.05);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-banner {
+                height: 200px;
+            }
+            
+            .hero-text {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .hero-overlay {
+                padding: 1rem;
+            }
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .card-text {
+            flex-grow: 1;
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #666;
+        }
+
+        /* 表单样式 */
+        .form-container {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .form-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* 信息部分样式 */
+        .info-section {
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .info-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .info-content {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info-content ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .info-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* 联系信息样式 */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer ol {
+            padding: 0;
+            margin: 0 auto 1.5rem;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        footer li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+		.protection-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.001); /* 几乎完全透明 */
+			z-index: 10;
+			cursor: not-allowed;
+			pointer-events: all; /* 确保覆盖层能捕获所有交互 */
+		}
+
+		.image-container {
+			position: relative;
+			display: inline-block;
+		}
+
+
+		.alert {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+            color: #1565C0;
+        }
+
+        .alert-warning {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        .file-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .file-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .alternative-method {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px dashed var(--primary-color);
+        }
+
+
+        /* 动画延迟 */
+        .card:nth-child(1) { transition-delay: 0.1s; }
+        .card:nth-child(2) { transition-delay: 0.2s; }
+        .card:nth-child(3) { transition-delay: 0.3s; }
+        .card:nth-child(4) { transition-delay: 0.4s; }
+
+        .form-container { transition-delay: 0.2s; }
+        .info-section { transition-delay: 0.3s; }
+    </style>
+</head>
+
+<body>
+
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">FocalRailways官方网站</div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html">首页</a>
+                    <a href="material.html">素材库</a>
+                    <a href="offer.html" >提供素材</a>
+                    <a href="tools.html">工具集</a>
+                    <a href="contact.html">联系作者</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="content-container">
+		
+        <!-- 页面标题 -->
+        <h1 class="page-title" id="main-title">向本站提供素材</h1>
+        
+        <!-- 英雄图片 -->
+        <div class="hero-container">
+            <div class="hero-banner">
+                <img src="https://s21.ax1x.com/2025/08/29/pV6Wzfe.jpg" alt="铁路素材贡献" class="hero-image">
+                <div class="hero-overlay">
+                    <div class="hero-text">分享您的铁路摄影作品，丰富我们的素材库</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 介绍卡片 -->
+        <div class="card">
+            <div class="card-content">
+                <i class="fas fa-info-circle"></i>
+                <div class="card-text">
+                    <h3>为什么要分享素材？</h3>
+                    <p>您的贡献将帮助更多铁路爱好者获取高质量素材，共同推动铁路文化传播。优质素材将在本站展示并标注作者信息。</p>
+                </div>
+            </div>
+        </div>
+
+
+		<!-- 指南信息 -->
+        <div class="info-section">
+            <h2 class="info-title">素材提交指南</h2>
+            <div class="info-content">
+				<h2>为确保素材质量和使用规范，请遵循以下指南：</h2>
+                <p>由于存储限制，只有高质量且通过本站审核的素材才能加入素材库，否则将退回</p>
+                <ul>
+                    <li>素材应为原创作品或已获得授权，如是授权请在上传同时提供授权截图</li>
+                    <li>图片分辨率不低于1920×1080像素</li>
+                    <li>视频素材建议为1080p 60fps或更高分辨率</li>
+                    <li>请提供准确的拍摄信息（时间、地点等）</li>
+					<li>明确您提交的素材是否可下载</li>
+                    <li>允许加入自己的水印保护版权</li>
+                    <li>确保素材内容符合相关法律法规</li>
+                </ul>
+                <p>提交后，我们的团队将在3-5个工作日内审核您的素材，并通过您提供的联系方式通知审核结果。</p>
+            </div>
+        </div>
+
+        <!-- 版权信息 -->
+        <div class="info-section">
+            <h2 class="info-title">版权与使用说明</h2>
+            <div class="info-content">
+                <h2>提交素材即表示您同意以下条款：</h2>
+                <ul>
+                    <li>您保留对素材的著作权，但授予FocalRailways非独占的使用权</li>
+                    <li>本站有权对素材进行适当的编辑和优化</li>
+                    <li>素材将在本站标注作者信息（如提供）</li>
+                    <li>本站不会将素材用于商业用途，除非获得您的额外授权</li>
+                    <li>您有权随时要求撤下已提交的素材</li>
+					<li>FocalRailways会尽力保护您的素材，但不能100%保证不会被盗走。还是建议在合适的位置添加水印</li>
+                </ul>
+            </div>
+        </div>
+
+		<div class="info-section">
+            <h2 class="info-title">用户协议</h2>
+            <div class="info-content">
+				<ul>
+                    <li>本站所有素材仅供个人学习与参考，严禁用于商业用途</li>
+                    <li>未经原作者允许，不得转载本站素材</li>
+                    <li>本站可下载的素材会包含下载按钮，如没有则不开放下载</li>
+                    <li>使用本站素材需注明来源"FocalRailways"</li>
+                    <li>不得对素材进行恶意修改或诋毁性使用</li>
+                    <li>不得通过技术手段获取未开放下载的素材</li>
+                    <li>本站保留对素材的最终解释权</li>
+                </ul>
+                    
+                <p>使用本站素材即表示您同意以上协议</p>
+            </div>
+        </div>
+
+
+
+        <!-- 表单区域 -->
+        <div class="form-container" id="submitForm">
+            <h2 class="info-title">素材提交表单</h2>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>重要提示：</strong>由于邮件服务限制，通过表单提交的图片可能无法正常显示。建议您同时通过备用方式提交素材文件。
+            </div>
+
+            <!-- 移除action属性，我们将使用JavaScript处理提交 -->
+            <form id="materialForm">
+                <div class="form-group">
+                    <label for="materialTitle">素材标题</label>
+                    <input type="text" id="materialTitle" name="materialTitle" required placeholder="例如：CR400AF-Z动车组">
+                </div>
+
+                <div class="form-group">
+                    <label for="materialDescription">素材描述</label>
+                    <textarea id="materialDescription" name="materialDescription" required placeholder="请详细描述素材内容、拍摄地点、时间等信息"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="materialType">素材类型</label>
+                    <select id="materialType" name="materialType" required>
+                        <option value="">请选择素材类型</option>
+                        <option value="fx">复兴号动车组</option>
+                        <option value="smt">智能型（技术提升）动车组</option>
+                        <option value="hx">和谐号动车组</option>
+                        <option value="dj">高速综合检测列车</option>
+                        <option value="ptj">普铁检</option>
+                        <option value="ev">电力机车</option>
+                        <option value="station">车站</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="materialFile">素材文件</label>
+                    <input type="file" id="materialFile" name="materialFile">
+                    <small>支持格式: JPG, PNG (最大10MB)。如果上传失败，请通过备用邮件方式提交。</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactInfo">联系方式</label>
+                    <input type="email" id="contactInfo" name="contactInfo" required placeholder="邮箱">
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <label for="agreeTerms">我同意本站的素材使用协议，并确认拥有所提交素材的版权</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">提交素材</button>
+            </form>
+
+            <!-- 成功消息容器 -->
+            <div id="successMessage" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; color: #155724; border-radius: 5px;">
+                <i class="fas fa-check-circle"></i> 素材提交成功！我们将在3-7个工作日内审核并联系您。
+            </div>
+
+            <div class="alternative-method">
+                <h3><i class="fas fa-envelope"></i> 备用提交方式</h3>
+                <p>如果文件上传遇到问题，请直接发送邮件：</p>
+                <ul>
+                    <li><strong>收件邮箱：</strong>2247028586@qq.com</li>
+                    <li><strong>邮件主题：</strong>【素材提交】+ 素材标题</li>
+                    <li><strong>邮件内容：</strong>包含素材描述、类型、联系方式等信息</li>
+                    <li><strong>附件：</strong>直接附加素材文件</li>
+                </ul>
+                <button onclick="copyEmail()" class="btn btn-primary" style="margin-top: 10px;">
+                    <i class="fas fa-copy"></i> 复制邮箱地址
+                </button>
+            </div>
+
+        </div>
+
+		<!-- 联系信息 -->
+        <div class="info-section">
+            <h2 class="info-title">联系我们</h2>
+            <div class="info-content">
+                <p>如有任何疑问或需要帮助，请通过以下方式联系我们：</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>3540579389@qq.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>暂不开放</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-qq"></i>
+                        <span>3540579389</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </main>
+
+	
+    
+    <!-- 返回顶部 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        
+        <div class="container">
+            <p>&copy; 2025 FocalRailways官方网站 | 保留所有权利 | 未经允许 禁止转载 包括且不限于盗图、商业用途等行为</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 移动菜单
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // 主题切换
+        function updateThemeBasedOnTime() {
+            const hour = new Date().getHours();
+            const isNight = hour >= 19 || hour < 7;
+            document.body.classList.toggle('dark-mode', isNight);
+            updateThemeIcon(isNight);
+        }
+
+        function updateThemeIcon(isDark) {
+            const icon = document.querySelector('#themeToggle i');
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            updateThemeIcon(isDarkMode);
+        });
+
+        updateThemeBasedOnTime();
+
+
+        // 表单提交代码
+        document.getElementById('materialForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // 显示提交中状态
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中...';
+            submitBtn.disabled = true;
+
+            try {
+                // 收集表单数据
+                const formData = {
+                    materialTitle: document.getElementById('materialTitle').value,
+                    materialDescription: document.getElementById('materialDescription').value,
+                    materialType: document.getElementById('materialType').value,
+                    contactInfo: document.getElementById('contactInfo').value,
+                    agreeTerms: document.getElementById('agreeTerms').checked
+                };
+
+                console.log('正在通过 Netlify Functions 提交...', formData);
+
+                // 调用 Netlify Function
+                const response = await fetch('/.netlify/functions/submit-material', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // 显示成功消息
+                    const successMessage = document.getElementById('successMessage');
+                    if (successMessage) {
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+
+                    // 重置表单
+                    this.reset();
+
+                    // 8秒后隐藏成功消息
+                    setTimeout(() => {
+                        if (successMessage) {
+                            successMessage.style.display = 'none';
+                        }
+                    }, 8000);
+                } else {
+                    throw new Error(result.error || '提交失败，请重试');
+                }
+            } catch (error) {
+                console.error('提交错误:', error);
+
+                let errorMessage = '提交失败: ' + error.message;
+
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += '\n\n网络连接失败，请检查网络后重试';
+                } else if (error.message.includes('环境变量')) {
+                    errorMessage += '\n\n服务器配置错误，请联系网站管理员';
+                }
+
+                alert(errorMessage + '\n\n如果问题持续，请直接发送邮件到 2247028586@qq.com');
+            } finally {
+                // 恢复按钮状态
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // 复制邮箱功能
+        function copyEmail() {
+            const email = '2247028586@qq.com';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(function() {
+                    alert('邮箱地址已复制到剪贴板: ' + email);
+                }).catch(function() {
+                    prompt('请手动复制邮箱地址:', email);
+                });
+            } else {
+                // 兼容旧浏览器
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('邮箱地址已复制到剪贴板: ' + email);
+                } catch (err) {
+                    prompt('请手动复制邮箱地址:', email);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // 动画初始化函数
+        function initAnimations() {
+            // 立即触发所有在视口内的元素动画
+            checkVisibility();
+            
+            // 设置一个延迟，确保所有元素都已加载
+            setTimeout(() => {
+                checkVisibility();
+            }, 300);
+        }
+
+        // 检查元素可见性
+        function checkVisibility() {
+            // 页面标题
+            const pageTitle = document.getElementById('main-title');
+            if (pageTitle) {
+                const titlePosition = pageTitle.getBoundingClientRect();
+                if (titlePosition.top < window.innerHeight + 100) {
+                    pageTitle.classList.add('show');
+                }
+            }
+
+            // 英雄图片
+            const heroBanner = document.querySelector('.hero-banner');
+            if (heroBanner && !heroBanner.classList.contains('show')) {
+                const position = heroBanner.getBoundingClientRect();
+                if (position.top < window.innerHeight + 100) {
+                    heroBanner.classList.add('show');
+                }
+            }
+
+            // 卡片
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                const position = card.getBoundingClientRect();
+                if (position.top < window.innerHeight + 100 && !card.classList.contains('show')) {
+                    setTimeout(() => {
+                        card.classList.add('show');
+                    }, index * 100);
+                }
+            });
+
+            // 表单容器
+            const formContainer = document.getElementById('submitForm');
+            if (formContainer && !formContainer.classList.contains('show')) {
+                const position = formContainer.getBoundingClientRect();
+                if (position.top < window.innerHeight + 100) {
+                    formContainer.classList.add('show');
+                }
+            }
+
+            // 信息部分
+            const infoSections = document.querySelectorAll('.info-section');
+            infoSections.forEach((section, index) => {
+                const position = section.getBoundingClientRect();
+                if (position.top < window.innerHeight + 100 && !section.classList.contains('show')) {
+                    setTimeout(() => {
+                        section.classList.add('show');
+                    }, index * 100);
+                }
+            });
+
+            // 返回顶部按钮
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        }
+
+		// 禁用图片拖拽
+		document.addEventListener('dragstart', function(e) {
+			if (e.target.tagName === 'IMG') {
+				e.preventDefault();
+			}
+		});
+
+		// 禁用右键菜单
+		document.addEventListener('contextmenu', function(e) {
+			if (e.target.tagName === 'IMG' || e.target.classList.contains('protection-overlay')) {
+				e.preventDefault();
+			}
+		});
+
+		// 防止开发者工具
+		document.addEventListener('keydown', function(e) {
+			// 禁用F12
+			if (e.key === 'F12') {
+				e.preventDefault();
+			}
+			// 禁用Ctrl+Shift+I
+			if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+				e.preventDefault();
+			}
+			// 禁用Ctrl+U（查看源代码）
+			if (e.ctrlKey && e.key === 'u') {
+				e.preventDefault();
+			}
+		});
+
+        // 返回顶部
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 监听滚动
+        window.addEventListener('scroll', checkVisibility);
+        
+        // 页面加载时初始化
+        window.addEventListener('load', function() {
+            initAnimations();
+        });
+    </script>
+</body>
+</html>
