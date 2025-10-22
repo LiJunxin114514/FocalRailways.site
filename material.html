@@ -779,7 +779,6 @@
             min-height: 120px;
             display: flex;
             align-items: center;
-            /* 动画初始状态 */
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -1462,15 +1461,48 @@
 			padding-left: 0.5rem;
 		}
 
-		/* 确保卡片内的文字正常显示 */
-		.card .card-text {
-			width: 100%;
-		}
 
-		.card .card-text h3 {
-			margin-bottom: 1rem;
-			color: var(--primary-color);
-		}
+		/* 修复底部卡片样式 - 保持原有布局 */
+        .bottom-card .card-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .bottom-card .card-text {
+            flex-grow: 1;
+        }
+
+        .bottom-card .card-text h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .bottom-card .card-text p {
+            color: #666;
+        }
+
+        .dark-mode .bottom-card .card-text p {
+            color: #ccc;
+        }
+
+        /* 修复协议卡片样式 */
+        .bottom-card .agreement-list {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            width: 100%;
+        }
+
+        .bottom-card .agreement-list ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .bottom-card .agreement-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
 
 		/* 暗色模式适配 */
 		.dark-mode .agreement-list {
@@ -1479,7 +1511,7 @@
 
 		.dark-mode .agreement-list li {
 			color: #e0e0e0;
-}
+          }
 
 		/* 动画延迟 */
 		.category-card:nth-child(1) { transition-delay: 0.1s; }
@@ -1487,6 +1519,151 @@
 		.category-card:nth-child(3) { transition-delay: 0.3s; }
 		.category-card:nth-child(4) { transition-delay: 0.4s; }
 		.category-card:nth-child(5) { transition-delay: 0.5s; }
+
+
+
+        /* 底部卡片专用样式 */
+        .bottom-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 1200px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .bottom-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 底部卡片扫掠动画效果 */
+        .bottom-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.7s ease;
+            z-index: 1;
+        }
+
+        .bottom-card:hover::before {
+            left: 100%;
+        }
+
+        .bottom-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-hover-bg);
+            opacity: 0;
+            transition: opacity 0.5s ease 0.1s;
+            z-index: 1;
+        }
+
+        .bottom-card:hover::after {
+            opacity: 1;
+        }
+
+        .bottom-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .bottom-card .card-content {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bottom-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+
+        .bottom-card .card-text {
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .bottom-card .card-text h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .bottom-card .agreement-list {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            width: 100%;
+        }
+
+        .bottom-card .agreement-list ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+            width: 100%;
+        }
+
+        .bottom-card .agreement-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+            width: 100%;
+        }
+
+        /* 暗色模式适配 */
+        .dark-mode .bottom-card .agreement-list {
+            color: var(--text-color);
+        }
+
+        .dark-mode .bottom-card .agreement-list li {
+            color: #e0e0e0;
+        }
+
+        /* 底部卡片动画延迟 */
+        .bottom-card:nth-child(1) { transition-delay: 0.1s; }
+        .bottom-card:nth-child(2) { transition-delay: 0.2s; }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .bottom-card {
+                padding: 1.2rem;
+            }
+
+            .bottom-card .card-content {
+                flex-direction: column;
+            }
+
+            .bottom-card i {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                align-self: center;
+            }
+
+            .bottom-card .agreement-list ol {
+                padding-left: 1rem;
+            }
+        }
+
     </style>
 </head>
 
@@ -1523,7 +1700,7 @@
         
         <div class="hero-container">
             <div class="hero-banner">
-                <img src="https://s21.ax1x.com/2025/10/06/pV7aDeA.jpg" alt="CR400AF-A" class="hero-image">
+                <img src="img/material/hero.jpg" alt="CR400AF-S" class="hero-image">
                 <div class="hero-overlay">
                     <div class="hero-text">探索高质量铁路视觉资源与创意素材</div>
                 </div>
@@ -1537,7 +1714,7 @@
 				
 				<div class="category-card" onclick="window.location.href='fuxing.html'">
 					<div class="card-image">
-						<img src="https://s21.ax1x.com/2025/09/13/pVWca6J.jpg" alt="复兴号动车组">
+						<img src="img/material/FX.jpg" alt="复兴号动车组">
 						<div class="image-overlay"></div>
 					</div>
 					<div class="card-content">
@@ -1549,7 +1726,7 @@
 
 				<div class="category-card" onclick="window.location.href='fuxing.html'">
 					<div class="card-image">
-						<img src="https://s21.ax1x.com/2025/10/04/pV7CP2j.jpg" alt="和谐号动车组">
+						<img src="img/material/HX.jpg" alt="和谐号动车组">
 						<div class="image-overlay"></div>
 					</div>
 					<div class="card-content">
@@ -1561,7 +1738,7 @@
 				
 				<div class="category-card" onclick="window.location.href='fuxing.html'">
 					<div class="card-image">
-						<img src="https://free.picui.cn/free/2025/08/28/68b04ee1dec88.png" alt="高速综合检测列车">
+						<img src="img/material/DJ.png" alt="高速综合检测列车">
 						<div class="image-overlay"></div>
 					</div>
 					<div class="card-content">
@@ -1573,7 +1750,7 @@
 				
 				<div class="category-card" onclick="window.location.href='fuxing.html'">
 					<div class="card-image">
-						<img src="https://free.picui.cn/free/2025/08/29/68b08fc6c4b9f.png" alt="普铁检">
+						<img src="img/material/PJ.png" alt="普铁检">
 						<div class="image-overlay"></div>
 					</div>
 					<div class="card-content">
@@ -1585,7 +1762,7 @@
 				
 				<div class="category-card" onclick="window.location.href='fuxing.html'">
 					<div class="card-image">
-						<img src="https://free.picui.cn/free/2025/08/28/68b0196cbe32c.png" alt="牵引机车">
+						<img src="img/material/QY.png" alt="牵引机车">
 						<div class="image-overlay"></div>
 					</div>
 					<div class="card-content">
@@ -1597,7 +1774,7 @@
 			
 				<div class="category-card" onclick="window.location.href='fuxing.html'">
 					<div class="card-image">
-						<img src="https://free.picui.cn/free/2025/08/28/68b0196cbe32c.png" alt="车站">
+						<img src="img/material/ST.jpg" alt="车站">
 						<div class="image-overlay"></div>
 					</div>
 					<div class="card-content">
@@ -1611,9 +1788,9 @@
 		</section>
         
 		<div id="downloadToast" class="download-toast"></div>
-        
+
         <!-- 底部卡片 -->
-        <div class="card bottom-card" onclick="window.location.href='offer.html'">
+        <div class="bottom-card" onclick="window.location.href='offer.html'">
             <div class="card-content">
                 <i class="fas fa-images"></i>
                 <div class="card-text">
@@ -1623,26 +1800,26 @@
             </div>
         </div>
 
-		<div class="card bottom-card">
-			<div class="card-content">
-				<i class="fas fa-file-contract"></i>
-				<div class="card-text">
-					<h3>使用条款与版权声明</h3>
-					<div class="agreement-list">
-						<ol>
-							<li>本站所有素材仅供个人学习与参考，严禁用于商业用途</li>
-							<li>未经原作者允许，不得转载本站素材</li>
-							<li>本站可下载的素材会包含下载按钮，如没有则不开放下载</li>
-							<li>使用本站素材需注明来源"FocalRailways"</li>
-							<li>不得对素材进行恶意修改或诋毁性使用</li>
-							<li>不得通过技术手段获取未开放下载的素材</li>
-							<li>本站保留对素材的最终解释权</li>
-							<li>如发现盗图，FocalRailways及图片原作者会请你喝茶</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="bottom-card">
+            <div class="card-content">
+                <i class="fas fa-file-contract"></i>
+                <div class="card-text">
+                    <h3>使用条款与版权声明</h3>
+                    <div class="agreement-list">
+                        <ol>
+                            <li>本站所有素材仅供个人学习与参考，严禁用于商业用途</li>
+                            <li>未经原作者允许，不得转载本站素材</li>
+                            <li>本站可下载的素材会包含下载按钮，如没有则不开放下载</li>
+                            <li>使用本站素材需注明来源"FocalRailways"</li>
+                            <li>不得对素材进行恶意修改或诋毁性使用</li>
+                            <li>不得通过技术手段获取未开放下载的素材</li>
+                            <li>本站保留对素材的最终解释权</li>
+                            <li>如发现盗图，FocalRailways及图片原作者会请你喝茶</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     
     <!-- 返回顶部 -->

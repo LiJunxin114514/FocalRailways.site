@@ -716,10 +716,10 @@
         function viewImage(url) {
             // 显示提示
             showViewToast('在新标签页中打开图片...');
-            
+
             // 在新标签页中打开图片
             window.open(url, '_blank');
-            
+
             // 显示成功提示
             setTimeout(() => {
                 showViewToast('图片已在新标签页中打开', 'info');
@@ -730,17 +730,73 @@
         function showViewToast(message, type = 'info') {
             const toast = document.getElementById('viewToast');
             if (!toast) return;
-            
+
             toast.textContent = message;
             toast.className = 'view-toast';
             if (type === 'info') {
                 toast.classList.add('info');
             }
             toast.style.display = 'block';
-            
+
             setTimeout(() => {
                 toast.style.display = 'none';
             }, 3000);
+        }
+
+        // 分类导航高亮功能
+        function initCategoryNavigation() {
+            const sections = document.querySelectorAll('.category-section');
+            const navLinks = document.querySelectorAll('.category-link');
+
+            // 创建Intersection Observer来监测section进入视口
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 移除所有链接的active类
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+
+                        // 获取当前可见section的ID
+                        const currentId = entry.target.id;
+
+                        // 找到对应的导航链接并添加active类
+                        const activeLink = document.querySelector(`.category-link[href="#${currentId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-20% 0px -70% 0px', // 调整触发区域
+                threshold: 0.1
+            });
+
+            // 观察所有section
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 点击导航链接时的平滑滚动
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    if (targetSection) {
+                        // 计算偏移量，考虑固定导航栏的高度
+                        const offset = 100;
+                        const targetPosition = targetSection.offsetTop - offset;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         }
 
         document.addEventListener('contextmenu', function(e) {
@@ -819,7 +875,7 @@
                     }
                 });
             }, observerOptions);
-            
+
             // 观察所有需要动画的元素
             document.querySelectorAll('.page-title, .category-intro, .category-nav, .material-card').forEach(element => {
                 observer.observe(element);
@@ -848,13 +904,14 @@
         // 初始化
         window.addEventListener('load', function() {
             initIntersectionObserver();
-            
+            initCategoryNavigation(); // 新增这行
+
             // 添加滚动事件监听器
             window.addEventListener('scroll', handleScroll);
-            
+
             // 初始检查
             handleScroll();
-            
+
             // 处理URL hash（如果有）
             if (window.location.hash) {
                 const targetElement = document.querySelector(window.location.hash);
