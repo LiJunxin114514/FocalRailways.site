@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复兴号动车组 - FocalRailways素材库</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1565C0;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --card-hover-bg: #e3f2fd;
+            --content-width: 90vw;
+            --content-height: calc(var(--content-width) * 9 / 16);
+        }
+
+        .dark-mode {
+            --primary-color: #2196F3;
+            --secondary-color: #0D47A1;
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --card-hover-bg: #1a237e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: none;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: flex-end;
+            flex: 1;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-left, .nav-right {
+                flex: none;
+            }
+        }
+
+        /* 内容容器 */
+        .content-container {
+            width: var(--content-width);
+            max-width: 1200px;
+            margin: 2rem auto;
+            min-height: var(--content-height);
+            position: relative;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .page-title.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 分类介绍 */
+		.category-title {
+			font-size: 2rem;
+			color: var(--primary-color);
+			margin-bottom: 2rem;
+			padding-bottom: 0.8rem;
+			position: relative;
+			text-align: left; /* 改为左对齐 */
+			width: 100%;
+		}
+
+		.category-title::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+			border-radius: 2px;
+		}
+
+        .category-intro {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .category-intro.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .category-intro p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* 素材网格 */
+        .materials-grid {
+            display: grid;
+			grid-template-columns: 1fr; /* 手机端默认单列 */
+			gap: 1.5rem;
+			margin: 2rem 0;
+        }
+
+		/* 电脑端改为两列布局 */
+		@media (min-width: 768px) {
+			.materials-grid {
+				grid-template-columns: repeat(2, 1fr); /* 电脑端两列 */
+			}
+		}
+
+        .material-card {
+            background: var(--card-bg);
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: var(--shadow);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			opacity: 0;
+			transform: translateY(30px);
+			transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+			width: 100%; /* 确保卡片占满网格单元格 */
+        }
+
+        .material-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .material-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .material-info {
+            padding: 1.5rem; /* 增加内边距让内容更宽松 */
+        }
+
+        .material-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .material-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .material-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* 查看按钮样式 */
+        .view-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+            margin-top: 0.5rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .view-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .category-intro {
+                padding: 1.5rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* 分类导航 */
+        .category-nav {
+            position: sticky;
+            top: 80px;
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            z-index: 90;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, background-color 0.3s ease, backdrop-filter 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark-mode .category-nav {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-nav.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-nav-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .category-link {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .dark-mode .category-link {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-link:hover, .category-link.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        /* 查看提示样式 */
+        .view-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            z-index: 10000;
+            display: none;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .view-toast.info {
+            background-color: rgba(33, 150, 243, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .category-nav-inner {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 0.5rem 0;
+                -webkit-overflow-scrolling: touch; /* 为iOS设备提供流畅滚动 */
+            }
+
+            .category-link {
+                white-space: nowrap;
+                flex-shrink: 0; /* 防止链接被压缩 */
+                padding: 0.4rem 0.8rem; /* 调整内边距 */
+                font-size: 0.9rem;
+            }
+
+            /* 可选：添加滚动提示 */
+            .category-nav-inner::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 30px;
+                height: 100%;
+                background: linear-gradient(to right, transparent, var(--card-bg));
+                pointer-events: none;
+            }
+
+            .dark-mode .category-nav-inner::after {
+                background: linear-gradient(to right, transparent, var(--card-bg));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-nav {
+                padding: 0.5rem; /* 减少内边距 */
+                margin: 1rem 0; /* 减少外边距 */
+            }
+
+            .category-title {
+                font-size: 1.5rem; /* 缩小分类标题 */
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem; /* 缩小页面标题 */
+                margin: 1rem 0;
+            }
+
+            .category-intro {
+                padding: 1rem; /* 减少内边距 */
+                margin: 1rem 0;
+            }
+
+            .category-intro h2 {
+                font-size: 1.3rem; /* 缩小介绍标题 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-nav {
+                top: 70px; /* 调整粘性定位的顶部距离 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">FocalRailways官方网站</div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html">首页</a>
+                    <a href="material.html">素材库</a>
+                    <a href="offer.html">提供素材</a>
+                    <a href="tools.html">工具集</a>
+                    <a href="contact.html">联系作者</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="content-container">
+        <!-- 页面标题 -->
+        <h1 class="page-title" id="main-title">复兴号动车组</h1>
+        
+        <!-- 分类导航 -->
+        <div class="category-nav">
+            <div class="category-nav-inner">
+                <a href="#cr400af" class="category-link active">CR400AF系列</a>
+                <a href="#cr400bf" class="category-link">CR400BF系列</a>
+				<a href="#cr400afz" class="category-link">CR400AF智能系列</a>
+				<a href="#cr400bfz" class="category-link">CR400F智能系列</a>
+                <a href="#cr300af" class="category-link">CR300AF系列</a>
+                <a href="#cr300bf" class="category-link">CR300BF系列</a>
+                <a href="#cr200j" class="category-link">CR200J系列</a>
+            </div>
+        </div>
+        
+        <!-- 分类介绍 -->
+        <section class="category-intro">
+            <h2>关于复兴号动车组</h2>
+            <p>复兴号动车组是中国铁路总公司组织国内企业自主研发、具有完全知识产权的新一代高速列车。它采用了先进的设计理念和技术标准，在安全性、经济性、舒适性等方面达到了世界先进水平。</p>
+            <p>复兴号系列动车组包括多个型号，覆盖不同速度等级和运营需求，是中国高速铁路技术的重要代表。</p>
+        </section>
+        
+        <!-- CR400AF系列 -->
+        <section id="cr400af" class="category-section">
+            <h2 class="category-title">CR400AF系列</h2>
+            <div class="materials-grid">
+				
+                <div class="material-card">
+                    <img src="img\material\CR400AF\CR400AF.jpg" alt="CR400AF" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400AF</h3>
+                        <p class="material-desc">8辆编组的复兴号AF系列动车组，标准版设计</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span><i class="fas fa-image"></i> HUAWEI Pura70</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <img src="img\material\CR400AF\CR400AF-A.jpg" alt="CR400AF-A" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400AF-A</h3>
+                        <p class="material-desc">16辆编组的复兴号AF系列动车组，最高运营速度350km/h</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span><i class="fas fa-image"></i> HUAWEI Pura70</span>
+                        </div>
+                    </div>
+                </div>
+				
+            </div>
+        </section>
+        
+        <!-- CR400BF系列 -->
+        <section id="cr400bf" class="category-section">
+            <h2 class="category-title">CR400BF系列</h2>
+            <div class="materials-grid">
+				<div class="material-card">
+                    <img src="img\material\CR400BF\CR400BF.jpg" alt="CR400BF" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF</h3>
+                        <p class="material-desc">8辆编组的复兴号BF系列动车组，标准版设计</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span><i class="fas fa-image"></i> HUAWEI Pura70</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <img src="img\material\CR400BF\CR400BF-B.jpg" alt="CR400BF-B" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF-B</h3>
+                        <p class="material-desc">17辆编组的复兴号BF系列动车组，超长编组提升定员</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span style="text-decoration: underline;" onclick="window.location.href='https://space.bilibili.com/3493119966317033'">摄影高铁的man</span>
+                            <span><i class="fas fa-image"></i> iPhone 12 Pro Max0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <img src="img\material\CR400BF\CR400BF-G.jpg" alt="CR400BF-G" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF-G</h3>
+                        <p class="material-desc">高原版BF动车组</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span style="text-decoration: underline;" onclick="window.location.href='https://space.bilibili.com/3493119966317033'">摄影高铁的man</span>
+                            <span><i class="fas fa-image"></i> iPhone 12 Pro Max</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+		<!-- CR400AF智能系列 -->
+        <section id="cr400afz" class="category-section">
+            <h2 class="category-title">CR400AF智能系列</h2>
+            <div class="materials-grid">
+				<div class="material-card">
+                    <img src="img\material\CR400AF-ZS\CR400AF-Z.jpg" alt="CR400AF-Z" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400AF-Z</h3>
+                        <p class="material-desc">8节编组的AF智能动车</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+							<!--<span style="text-decoration: underline;" onclick="window.location.href='https://space.bilibili.com/3493119966317033'">摄影高铁的man</span>-->
+                            <span><i class="fas fa-image"></i> iPhone 12 Pro Max</span>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="material-card">
+                    <img src="img\material\CR400AF-ZS\CR400AF-S.jpg" alt="CR400AF" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400AF-S</h3>
+                        <p class="material-desc">8节编组的AF技术提升型智能动车，有很大升级</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span><i class="fas fa-image"></i> HUAWEI Pura70</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+		<!-- CR400BF智能系列 -->
+        <section id="cr400bfz" class="category-section">
+            <h2 class="category-title">CR400BF智能系列</h2>
+            <div class="materials-grid">
+
+                <div class="material-card">
+                    <img src="img\material\CR400BF-ZS\CR400BF-Z.jpg" alt="CR400BF-Z" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF-Z</h3>
+                        <p class="material-desc">8节编组的BF智能动车</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span><i class="fas fa-image"></i> HUAWEI Pura70</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-card">
+                    <img src="img\material\CR400BF-ZS\CR400BF-S.jpg" alt="CR400BF-S" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF-S</h3>
+                        <p class="material-desc">8节编组的BF技术提升型智能动车，有很大升级</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span><i class="fas fa-image"></i> HUAWEI Pura70</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <img src="img\material\CR400BF-ZS\CR400BF-C.jpg" alt="CR400BF-C" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF-C</h3>
+                        <p class="material-desc">冬奥版智能动车组，专为京张高铁打造</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span style="text-decoration: underline;" onclick="window.location.href='https://space.bilibili.com/3493119966317033'">摄影高铁的man</span>
+                            <span><i class="fas fa-image"></i> iPhone 12 Pro Max</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <img src="img\material\CR400BF-ZS\CR400BF-BS.png" alt="CR400BF-BS" class="material-image">
+                    <div class="material-info">
+                        <h3 class="material-title">CR400BF-BS</h3>
+                        <p class="material-desc">17节编组的BF技术提升型智能动车，京沪高铁的主力军</p>
+                        <div class="material-meta">
+                            <span><i class="fas fa-calendar"></i> 2025年</span>
+                            <span style="text-decoration: underline;" onclick="window.location.href='https://space.bilibili.com/3493119966317033'">摄影高铁的man</span>
+                            <span><i class="fas fa-image"></i> iPhone 12 Pro Max</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- 其他系列可以类似添加 -->
+    </main>
+    
+    <!-- 返回顶部 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FocalRailways官方网站 | 保留所有权利 | 未经允许 禁止转载 包括且不限于盗图、商业用途等行为</p>
+        </div>
+    </footer>
+
+    <!-- 查看提示 -->
+    <div id="viewToast" class="view-toast"></div>
+
+    <script>
+        // 查看图片函数 - 在新标签页中打开图片
+        function viewImage(url) {
+            // 显示提示
+            showViewToast('在新标签页中打开图片...');
+
+            // 在新标签页中打开图片
+            window.open(url, '_blank');
+
+            // 显示成功提示
+            setTimeout(() => {
+                showViewToast('图片已在新标签页中打开', 'info');
+            }, 500);
+        }
+
+        // 查看提示函数
+        function showViewToast(message, type = 'info') {
+            const toast = document.getElementById('viewToast');
+            if (!toast) return;
+
+            toast.textContent = message;
+            toast.className = 'view-toast';
+            if (type === 'info') {
+                toast.classList.add('info');
+            }
+            toast.style.display = 'block';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // 分类导航高亮功能
+        function initCategoryNavigation() {
+            const sections = document.querySelectorAll('.category-section');
+            const navLinks = document.querySelectorAll('.category-link');
+
+            // 创建Intersection Observer来监测section进入视口
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 移除所有链接的active类
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+
+                        // 获取当前可见section的ID
+                        const currentId = entry.target.id;
+
+                        // 找到对应的导航链接并添加active类
+                        const activeLink = document.querySelector(`.category-link[href="#${currentId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-20% 0px -70% 0px', // 调整触发区域
+                threshold: 0.1
+            });
+
+            // 观察所有section
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 点击导航链接时的平滑滚动
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    if (targetSection) {
+                        // 计算偏移量，考虑固定导航栏的高度
+                        const offset = 100;
+                        const targetPosition = targetSection.offsetTop - offset;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 移动菜单
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // 主题切换
+        function updateThemeBasedOnTime() {
+            const hour = new Date().getHours();
+            const isNight = hour >= 19 || hour < 7;
+            document.body.classList.toggle('dark-mode', isNight);
+            updateThemeIcon(isNight);
+        }
+
+        function updateThemeIcon(isDark) {
+            const icon = document.querySelector('#themeToggle i');
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            updateThemeIcon(isDarkMode);
+        });
+
+        updateThemeBasedOnTime();
+
+        // 使用 Intersection Observer 检测元素进入视口
+        function initIntersectionObserver() {
+            // 检查浏览器是否支持 Intersection Observer
+            if (!('IntersectionObserver' in window)) {
+                // 如果不支持，直接显示所有元素
+                document.querySelectorAll('.page-title, .category-intro, .category-nav, .material-card').forEach(element => {
+                    if (element.classList.contains('page-title')) {
+                        element.classList.add('show');
+                    } else if (element.classList.contains('category-intro')) {
+                        element.classList.add('show');
+                    } else if (element.classList.contains('category-nav')) {
+                        element.classList.add('show');
+                    } else if (element.classList.contains('material-card')) {
+                        element.classList.add('show');
+                    }
+                });
+                return;
+            }
+
+            // 检测是否为移动设备
+            const isMobile = window.innerWidth <= 768;
+
+            // 根据设备类型调整配置
+            const observerOptions = {
+                root: null,
+                rootMargin: isMobile ? '0px 0px -5% 0px' : '0px 0px -10% 0px',
+                threshold: isMobile ? 0.01 : 0.05
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('page-title')) {
+                            entry.target.classList.add('show');
+                        } else if (entry.target.classList.contains('category-intro')) {
+                            entry.target.classList.add('show');
+                        } else if (entry.target.classList.contains('category-nav')) {
+                            entry.target.classList.add('show');
+                        } else if (entry.target.classList.contains('material-card')) {
+                            entry.target.classList.add('show');
+                        }
+                        // 停止观察已触发的元素
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // 观察所有需要动画的元素
+            document.querySelectorAll('.page-title, .category-intro, .category-nav, .material-card').forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // 返回顶部按钮显示/隐藏
+        function handleScroll() {
+            // 返回顶部按钮
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        // 返回顶部
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 初始化
+        window.addEventListener('load', function() {
+            initIntersectionObserver();
+            initCategoryNavigation(); // 新增这行
+
+            // 添加滚动事件监听器
+            window.addEventListener('scroll', handleScroll);
+
+            // 初始检查
+            handleScroll();
+
+            // 处理URL hash（如果有）
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
+        });
+
+        // 添加窗口大小变化监听器，以便在设备方向变化时重新初始化
+        window.addEventListener('resize', function() {
+            // 重新初始化 Intersection Observer
+            initIntersectionObserver();
+        });
+    </script>
+</body>
+</html>
