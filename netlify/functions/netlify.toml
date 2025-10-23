@@ -1,0 +1,5 @@
+[[redirects]]
+from = "https://focalrailways.site/*"
+to = "https://focalrailways.rth1.xyz/index_zy.html"
+status = 302
+force = true
