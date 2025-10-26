@@ -277,9 +277,22 @@
 
         .material-image {
             width: 100%;
-            height: 310px;
+            height: auto;
+            max-height: 400px;
             object-fit: cover;
             display: block;
+        }
+
+        @media (max-width: 768px) {
+            .material-image {
+                max-height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .material-image {
+                max-height: 200px;
+            }
         }
 
         .material-info {
